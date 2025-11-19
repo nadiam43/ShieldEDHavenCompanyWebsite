@@ -1,23 +1,35 @@
 import { useState } from 'react';
-import { Briefcase, GraduationCap, Shield, Linkedin, Twitter, Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Briefcase, GraduationCap } from 'lucide-react';
 import CTABanner from '../components/CTABanner';
 
-
-const CareerPage = () => {
+export default function CareerPage() {
   const [activeTab, setActiveTab] = useState<'career' | 'internship'>('career');
+  const [careerFile, setCareerFile] = useState<File | null>(null);
+  const [internFile, setInternFile] = useState<File | null>(null);
+
+  const handleCareerFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCareerFile(e.target.files[0]);
+    }
+  };
+
+  const handleInternFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setInternFile(e.target.files[0]);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-5xl font-bold text-center text-cyan-500 mb-8">
-            Join the Mission. Shape the Future
+    <div className="min-h-screen bg-white pt-0">
+        <section className="pt-20 pb-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+          <h2 className="text-5xl font-bold text-center text-cyan-500 mb-8" style={{ fontFamily: 'Poppins, sans-serif' }}>
+            Join the Mission. Shape the Future.
           </h2>
           <p className="text-xl text-center text-gray-700 mb-12 max-w-3xl mx-auto">
             We're seeking passionate individuals committed to helping create safer, more respectable digital environments in schools.
           </p>
 
-          {/* Tab Navigation */}
           <div className="flex justify-center mb-12">
             <div className="bg-gray-100 rounded-full p-2 inline-flex">
               <button
@@ -25,7 +37,7 @@ const CareerPage = () => {
                 className={`px-8 py-3 rounded-full font-semibold transition-all ${
                   activeTab === 'career'
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
-                    : 'text-gray-600 hover:text-gray-900'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
                 }`}
               >
                 <Briefcase className="w-5 h-5 inline mr-2" />
@@ -36,7 +48,7 @@ const CareerPage = () => {
                 className={`px-8 py-3 rounded-full font-semibold transition-all ${
                   activeTab === 'internship'
                     ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg'
-                    : 'text-gray-600 hover:text-gray-900'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
                 }`}
               >
                 <GraduationCap className="w-5 h-5 inline mr-2" />
@@ -45,13 +57,12 @@ const CareerPage = () => {
             </div>
           </div>
 
-          {/* Career Form */}
           {activeTab === 'career' && (
             <div className="max-w-3xl mx-auto">
               <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 shadow-xl">
                 <div className="flex justify-between items-start mb-8">
                   <div>
-                    <h3 className="text-3xl font-bold text-cyan-600 mb-4">Career Opportunities</h3>
+                    <h3 className="text-3xl font-bold text-cyan-600 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Career Opportunities</h3>
                     <p className="text-gray-700">
                       Join our team of passionate professionals dedicated to creating safer digital environments for students.
                     </p>
@@ -60,7 +71,6 @@ const CareerPage = () => {
                 </div>
 
                 <div className="space-y-6">
-                  {/* Form Inputs */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-gray-700 font-semibold mb-2 text-sm">First Name *</label>
@@ -94,14 +104,26 @@ const CareerPage = () => {
 
                   <div>
                     <label className="block text-gray-700 font-semibold mb-2 text-sm">Resume *</label>
-                    <div className="border-4 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-cyan-500 transition-colors cursor-pointer bg-white">
+                    <input
+                      type="file"
+                      id="careerFile"
+                      accept=".pdf,.doc,.docx"
+                      onChange={handleCareerFileChange}
+                      className="hidden"
+                    />
+                    <label
+                      htmlFor="careerFile"
+                      className="border-4 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-cyan-500 hover:bg-cyan-50 transition-all cursor-pointer bg-white block"
+                    >
                       <div className="text-4xl mb-2 text-cyan-500">📄</div>
-                      <div className="text-gray-600 text-sm font-medium">Click to upload or drag and drop</div>
+                      <div className="text-gray-600 text-sm font-medium">
+                        {careerFile ? careerFile.name : 'Click to upload or drag and drop'}
+                      </div>
                       <div className="text-gray-400 text-xs mt-1">PDF, DOC, DOCX (Max 5MB)</div>
-                    </div>
+                    </label>
                   </div>
 
-                  <button type="submit" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-lg">
+                  <button type="submit" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 hover:shadow-xl transition-all transform hover:scale-105 shadow-lg">
                     Submit Application
                   </button>
                 </div>
@@ -109,13 +131,12 @@ const CareerPage = () => {
             </div>
           )}
 
-          {/* Internship Form */}
           {activeTab === 'internship' && (
             <div className="max-w-3xl mx-auto">
               <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-xl">
                 <div className="flex justify-between items-start mb-8">
                   <div>
-                    <h3 className="text-3xl font-bold text-purple-600 mb-4">Internship Opportunities</h3>
+                    <h3 className="text-3xl font-bold text-purple-600 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Internship Opportunities</h3>
                     <p className="text-gray-700">
                       Gain hands-on experience and make a real impact while learning from industry professionals.
                     </p>
@@ -124,7 +145,6 @@ const CareerPage = () => {
                 </div>
 
                 <div className="space-y-6">
-                  {/* Form Inputs */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-gray-700 font-semibold mb-2 text-sm">First Name *</label>
@@ -163,14 +183,26 @@ const CareerPage = () => {
 
                   <div>
                     <label className="block text-gray-700 font-semibold mb-2 text-sm">Resume *</label>
-                    <div className="border-4 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-purple-500 transition-colors cursor-pointer bg-white">
+                    <input
+                      type="file"
+                      id="internFile"
+                      accept=".pdf,.doc,.docx"
+                      onChange={handleInternFileChange}
+                      className="hidden"
+                    />
+                    <label
+                      htmlFor="internFile"
+                      className="border-4 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-purple-500 hover:bg-purple-50 transition-all cursor-pointer bg-white block"
+                    >
                       <div className="text-4xl mb-2 text-purple-500">📄</div>
-                      <div className="text-gray-600 text-sm font-medium">Click to upload or drag and drop</div>
+                      <div className="text-gray-600 text-sm font-medium">
+                        {internFile ? internFile.name : 'Click to upload or drag and drop'}
+                      </div>
                       <div className="text-gray-400 text-xs mt-1">PDF, DOC, DOCX (Max 5MB)</div>
-                    </div>
+                    </label>
                   </div>
 
-                  <button type="submit" className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold py-4 rounded-lg hover:from-purple-600 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg">
+                  <button type="submit" className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold py-4 rounded-lg hover:from-purple-600 hover:to-pink-700 hover:shadow-xl transition-all transform hover:scale-105 shadow-lg">
                     Submit Application
                   </button>
                 </div>
@@ -179,10 +211,10 @@ const CareerPage = () => {
           )}
         </div>
 
-        <CTABanner />
+         <div className="mt-20">
+                    <CTABanner />
+                </div>
       </section>
     </div>
   );
-};
-
-export default CareerPage;
+}

@@ -1,68 +1,167 @@
-// import React from 'react';
-import { Shield } from 'lucide-react';
+import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import CTABanner from '../components/CTABanner';
+import HubLogo from '../assets/hub.jpg';
+import VeteranLogo from '../assets/veteran.jpg';
+import EdShieldLogo from '../assets/69DD6DCE-7F58-4D2E-9789-50D5181B8B9D.jpeg';
 
 interface HomePageProps {
   navigateTo: (page: string) => void;
 }
 
 export default function HomePage({ navigateTo }: HomePageProps) {
-  return (
-    <div className="min-h-screen bg-white pt-20">
-      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-20"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-white space-y-6">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight animate-fade-in">
-                Hello, Welcome to
-                <span className="block mt-2">ShieldED Haven</span>
-              </h1>
-              <p className="text-xl text-cyan-50">Protecting students with Artificial Intelligence-powered cyberbullying prevention</p>
-              <button
-                onClick={() => navigateTo('about')}
-                className="bg-white text-cyan-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-cyan-50 transition-all transform hover:scale-105 shadow-lg"
-              >
-                LEARN MORE
-              </button>
+  const triangleRef = useRef<HTMLDivElement | null>(null);
+  const veteranRef = useRef<HTMLDivElement | null>(null);
 
-              <div className="flex gap-6 mt-8">
-                <div className="bg-white p-6 rounded-lg shadow-xl w-36 h-36 flex items-center justify-center transform hover:scale-105 transition-all">
-                  <div className="text-center">
-                    <div className="text-sm font-bold text-blue-900">HUB</div>
-                    <div className="text-xs text-blue-700 mt-1">Certified</div>
-                    <Shield className="w-8 h-8 text-blue-600 mx-auto mt-2" />
-                  </div>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-xl w-36 h-36 flex items-center justify-center transform hover:scale-105 transition-all">
-                  <div className="text-center">
-                    <div className="text-sm font-bold text-red-800">VETERAN</div>
-                    <div className="text-sm font-bold text-red-800">OWNED</div>
-                    <Shield className="w-8 h-8 text-red-700 mx-auto mt-2" />
-                  </div>
-                </div>
-              </div>
+  const [logoSize, setLogoSize] = useState(80);
+
+  // AUTO-RESIZE LOGOS BASED ON TRIANGLE SHAPE
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (!triangleRef.current || !veteranRef.current) return;
+
+      const triangle = triangleRef.current.getBoundingClientRect();
+      const veteran = veteranRef.current.getBoundingClientRect();
+
+      const vetRightX = veteran.right - triangle.left;
+      const xPct = vetRightX / triangle.width;
+
+      const whiteHeightAtX = triangle.height * (1 - xPct);
+
+      // Slightly bigger logos (20%) but not exceeding triangle height
+      let size = Math.max(20, Math.floor(whiteHeightAtX - 2));
+      size = Math.min(size * 1.2, whiteHeightAtX - 2);
+
+      setLogoSize(size);
+    }
+
+    requestAnimationFrame(updateSize);
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  // Re-run size calc after images load
+  useEffect(() => {
+    const imgs = document.querySelectorAll('img');
+    imgs.forEach((img) =>
+      img.addEventListener('load', () =>
+        requestAnimationFrame(() => {
+          if (triangleRef.current) window.dispatchEvent(new Event('resize'));
+        })
+      )
+    );
+
+    return () => {
+      imgs.forEach((img) =>
+        img.removeEventListener('load', () => {})
+      );
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white">
+      <section
+        className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 overflow-hidden"
+      >
+
+        {/* Main Layout Wrapper */}
+        <div
+          className="relative z-10 w-full max-w-[1600px] flex flex-col justify-center"
+          style={{
+            paddingTop: 'clamp(6rem, 8vh + 2vw, 10rem)',   // more top padding for phones
+            paddingBottom: 'clamp(6rem, 12vh, 14rem)',
+            paddingLeft: 'clamp(1rem, 3vw, 4rem)',
+            paddingRight: 'clamp(1rem, 3vw, 4rem)',
+          }}
+        >
+
+          {/* 2-column responsive grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(2rem,4vw,5rem)] items-center">
+
+            {/* LEFT SIDE TEXT */}
+            <div className="text-white flex flex-col items-center text-center space-y-[clamp(1rem,2vw,3rem)] w-full">
+              <h1
+                className="font-bold w-full leading-snug"
+                style={{
+                  fontFamily: 'Poppins, sans-serif',
+                  fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                  lineHeight: '1.15'
+                }}
+              >
+                Hello, Welcome to ShieldED Haven
+              </h1>
+
+              <p
+                className="text-cyan-50 leading-relaxed w-full"
+                style={{
+                  fontSize: 'clamp(1rem, 2.2vw, 1.8rem)',
+                  maxWidth: 'clamp(300px, 90%, 700px)'
+                }}
+              >
+                Protecting students with Artificial Intelligence-powered cyberbullying prevention
+              </p>
+
+<button
+                onClick={() => navigateTo('about')}
+                className="bg-white text-cyan-500 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 uppercase tracking-wide"
+                style={{
+                  padding: 'clamp(0.7rem, 1.5vw, 1.3rem) clamp(2rem, 4vw, 4rem)',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.6rem)',
+                  marginBottom: 'clamp(1rem, 4vw, 3rem)' // extra bottom space for phone landscape
+                }}
+              >
+                Learn More
+              </button>
             </div>
 
-            <div className="relative">
-              <div className="relative z-10 transform hover:scale-105 transition-transform duration-500">
-                <div className="bg-white rounded-3xl p-8 shadow-2xl">
-                  <Shield className="w-32 h-32 mx-auto text-cyan-500" />
-                  <div className="text-center mt-4 text-3xl font-bold text-blue-600">ED</div>
-                </div>
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-purple-400 rounded-full opacity-50 animate-pulse"></div>
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-purple-500 rounded-full opacity-50 animate-pulse" style={{animationDelay: '1s'}}></div>
+            {/* RIGHT SIDE ED SHIELD IMAGE */}
+            <div className="flex items-center justify-center w-full" style={{ maxHeight: '60vh' }}>
+              <img
+                src={EdShieldLogo}
+                alt="ED Shield Logo"
+                className="object-contain drop-shadow-2xl w-full max-w-[850px]"
+                style={{
+                  height: 'auto',
+                  maxHeight: 'clamp(150px, 35vh + 10vw, 700px)',
+                }}
+              />
+            </div>
+
+          </div>
+        </div>
+
+        {/* BOTTOM TRIANGLE */}
+        <div
+          ref={triangleRef}
+          className="absolute bottom-0 w-full bg-white z-20 overflow-hidden"
+          style={{
+            height: 'clamp(140px, 16vw, 320px)',
+            clipPath: 'polygon(0 100%, 0 0, 100% 100%)'
+          }}
+        >
+          <div className="flex h-full items-end pb-[0px] pl-[clamp(1rem,3vw,4rem)]">
+            <div className="flex items-center gap-[clamp(1rem,3vw,4rem)]">
+
+              {/* HUB Logo */}
+              <div
+                style={{ width: logoSize, height: logoSize }}
+                className="flex items-center justify-center"
+              >
+                <img src={HubLogo} className="object-contain w-full h-full" />
               </div>
+
+              {/* Veteran */}
+              <div
+                ref={veteranRef}
+                style={{ width: logoSize, height: logoSize }}
+                className="flex items-center justify-center"
+              >
+                <img src={VeteranLogo} className="object-contain w-full h-full" />
+              </div>
+
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" className="w-full">
-            <path fill="#ffffff" d="M0,60 L1440,0 L1440,120 L0,120 Z"></path>
-          </svg>
-        </div>
       </section>
 
       <CTABanner />

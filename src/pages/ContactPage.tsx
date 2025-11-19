@@ -17,13 +17,13 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white pt-20">
-      <section className="py-20">
+        <section className="pt-20 pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-5xl font-bold text-center text-cyan-500 mb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>Connect with Us</h2>
           
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>Get In Touch With Us</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>Get In Touch</h3>
               <p className="text-gray-700 text-lg leading-relaxed mb-8">
                 Have questions about our program, pricing, partnerships, or how to bring ShieldED Haven to your District? We're here to help. Whether you're an educator, parent, policymaker, or potential partner, we'd love to hear from you.
               </p>
@@ -56,38 +56,43 @@ export default function ContactPage() {
               <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 mb-8">
                 <h4 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Contact Information</h4>
                 <div className="space-y-4">
+
                   {/* Email with Copy Button */}
                   <div className="flex items-center gap-3 group">
                     <Mail className="w-6 h-6 text-cyan-500 flex-shrink-0" />
-                    <button
-                      onClick={handleEmailClick}
-                      className="text-gray-700 hover:text-cyan-600 hover:underline transition-all"
-                    >
-                      contact@shieldedhaven.com
-                    </button>
-                    <button
-                      onClick={() => copyToClipboard('contact@shieldedhaven.com', 'Email')}
-                      className="ml-auto text-xs text-gray-500 hover:text-cyan-600 transition-all opacity-0 group-hover:opacity-100"
-                    >
-                      Copy
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleEmailClick}
+                        className="text-gray-700 hover:text-cyan-600 hover:underline transition-all"
+                      >
+                        contact@shieldedhaven.com
+                      </button>
+                      <button
+                        onClick={() => copyToClipboard('contact@shieldedhaven.com', 'Email')}
+                        className="text-xs text-gray-500 hover:text-cyan-600 transition-all"
+                      >
+                        Copy
+                      </button>
+                    </div>
                   </div>
                   
                   {/* Phone with Copy Button */}
                   <div className="flex items-center gap-3 group">
                     <Phone className="w-6 h-6 text-cyan-500 flex-shrink-0" />
-                    <button
-                      onClick={handlePhoneClick}
-                      className="text-gray-700 hover:text-cyan-600 hover:underline transition-all"
-                    >
-                      (555) 123-4567
-                    </button>
-                    <button
-                      onClick={() => copyToClipboard('(555) 123-4567', 'Phone')}
-                      className="ml-auto text-xs text-gray-500 hover:text-cyan-600 transition-all opacity-0 group-hover:opacity-100"
-                    >
-                      Copy
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handlePhoneClick}
+                        className="text-gray-700 hover:text-cyan-600 hover:underline transition-all"
+                      >
+                        (555) 123-4567
+                      </button>
+                      <button
+                        onClick={() => copyToClipboard('(555) 123-4567', 'Phone')}
+                        className="text-xs text-gray-500 hover:text-cyan-600 transition-all"
+                      >
+                        Copy
+                      </button>
+                    </div>
                   </div>
                   
                   {/* Location */}
@@ -112,7 +117,7 @@ export default function ContactPage() {
                     <Linkedin className="w-6 h-6" />
                   </a>
                   
-                  {/* X (Twitter) with new logo */}
+                  {/* X (Twitter) */}
                   <a 
                     href="https://x.com/ShieldedHaven?s=20" 
                     target="_blank" 
@@ -206,7 +211,9 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <CTABanner />
+         <div className="mt-20">
+                    <CTABanner />
+                </div>
       </section>
     </div>
   );
