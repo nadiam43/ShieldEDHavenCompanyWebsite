@@ -1,33 +1,37 @@
 import React, { useEffect } from "react";
-import CTABanner from "../components/CTABanner";
-import AOS from "aos";
+import CTABanner from "../components/CTABanner"; // Custom CTA component at the bottom
+import AOS from "aos"; // Animate on Scroll library
 import "aos/dist/aos.css";
 
 export default function ServicesPage() {
+  // Initialize AOS (Animate On Scroll) library when the component mounts
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    AOS.init({ duration: 800, once: true }); 
+    // duration: animation lasts 800ms
+    // once: animation happens only the first time it scrolls into view
   }, []);
 
   return (
     <div
       className="min-h-screen bg-gray-50 pt-20"
-      style={{ fontFamily: "Poppins, sans-serif" }} // ✅ global Poppins
+      style={{ fontFamily: "Poppins, sans-serif" }} // Set Poppins as the font for the page
     >
       <section className="py-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-          {/* Page Title */}
+
+          {/* PAGE TITLE */}
           <h2
             className="text-5xl font-bold text-center text-cyan-500 mb-8"
-            data-aos="fade-up"
+            data-aos="fade-up" // Fade in effect on scroll
           >
             Tools to Protect Students and Transform School Culture
           </h2>
 
-          {/* Intro */}
+          {/* INTRODUCTION PARAGRAPHS */}
           <div
             className="text-gray-700 text-lg leading-relaxed space-y-4 mb-12 max-w-4xl mx-auto"
             data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos-delay="150" // Delays animation by 150ms
           >
             <p>
               At ShieldED Haven, we offer a comprehensive suite of services designed to detect, prevent, and respond to cyberbullying in K-12 schools. Our platform combines cutting-edge Artificial Intelligence, real-time alert systems, and trauma-informed support tools to create a safer, more respectful digital environment for students. With tiered service options, we ensure that school districts of every size and need can access scalable solutions to address online harassment and foster digital resilience.
@@ -37,7 +41,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          {/* Service Tiers */}
+          {/* SERVICE TIERS TITLE */}
           <h3
             className="text-4xl font-bold text-center text-cyan-500 mb-12"
             data-aos="fade-up"
@@ -46,6 +50,7 @@ export default function ServicesPage() {
             Our Service Tiers
           </h3>
 
+          {/* SERVICE TIERS CARDS */}
           <div className="grid md:grid-cols-3 gap-8 mb-16 items-stretch">
             {[
               {
@@ -81,11 +86,18 @@ export default function ServicesPage() {
             ].map((tier, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-xl overflow-hidden transition-colors duration-500 transform hover:-translate-y-2 hover:shadow-2xl border-4 border-transparent hover:border-cyan-400 hover:bg-[#F5FBFF] flex flex-col h-full"
+                className={`bg-white rounded-2xl shadow-xl overflow-hidden transition-colors duration-500 transform hover:-translate-y-2 hover:shadow-2xl border-4 border-transparent ${
+                  index === 1
+                    ? "hover:border-[#6A5DFF]" // SHIELDED STRONG special hover border
+                    : index === 2
+                    ? "hover:border-purple-500" // SHIELDED ELITE special hover border
+                    : "hover:border-cyan-400"
+                } hover:bg-[#F5FBFF] flex flex-col h-full`}
                 data-aos="fade-up"
-                data-aos-delay={index * 200}
+                data-aos-delay={index * 200} // stagger animations
               >
-                {/* Header */}
+
+                {/* CARD HEADER */}
                 <div className={`bg-gradient-to-r ${tier.color} py-6`}>
                   <div className="h-16 flex items-center justify-center">
                     <h3 className="text-2xl font-bold text-white text-center leading-tight uppercase tracking-wide">
@@ -94,7 +106,7 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                {/* Body */}
+                {/* CARD BODY */}
                 <div className="p-8 flex-1 flex flex-col">
                   <ul className="space-y-4 mb-8 flex-1">
                     {tier.features.map((feature, fIndex) => (
@@ -115,7 +127,7 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          {/* Add-On Services */}
+          {/* ADD-ON SERVICES TITLE */}
           <h3
             className="text-4xl font-bold text-center text-cyan-500 mb-12"
             data-aos="fade-up"
@@ -124,6 +136,7 @@ export default function ServicesPage() {
             Additional Add-On Services
           </h3>
 
+          {/* ADD-ON SERVICES CARDS */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {[
               {
@@ -168,7 +181,7 @@ export default function ServicesPage() {
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               >
-                {/* Header */}
+                {/* CARD HEADER */}
                 <div className="bg-gradient-to-r from-purple-500 to-pink-500 py-4">
                   <div className="h-16 flex items-center justify-center px-2">
                     <h4 className="text-lg font-bold text-white text-center leading-tight">
@@ -177,7 +190,7 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                {/* Body */}
+                {/* CARD BODY */}
                 <div className="p-6 flex-1 flex flex-col">
                   <ul className="space-y-2 mb-6 flex-1">
                     {service.items.map((item, iIndex) => (
@@ -199,7 +212,7 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* CTA Banner */}
+        {/* CTA BANNER */}
         <div className="mt-20">
           <CTABanner />
         </div>

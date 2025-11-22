@@ -2,14 +2,18 @@ import { Shield, Linkedin, Facebook, Instagram, Mail, Phone, MapPin } from 'luci
 import CTABanner from '../components/CTABanner';
 
 export default function ContactPage() {
+
+  // Function to open default email client
   const handleEmailClick = () => {
     window.location.href = 'mailto:contact@shieldedhaven.com';
   };
 
+  // Function to initiate phone call on click
   const handlePhoneClick = () => {
     window.location.href = 'tel:+15551234567';
   };
 
+  // Function to copy text (email/phone) to clipboard
   const copyToClipboard = (text: string, type: string) => {
     navigator.clipboard.writeText(text);
     alert(`${type} copied to clipboard!`);
@@ -17,47 +21,52 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white pt-20">
-        <section className="pt-20 pb-0">
+      <section className="pt-20 pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-5xl font-bold text-center text-cyan-500 mb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>Connect with Us</h2>
+
+          {/* Page Title */}
+          <h2
+            className="text-5xl font-bold text-center text-cyan-500 mb-12"
+            style={{ fontFamily: 'Poppins, sans-serif' }}
+          >
+            Connect with Us
+          </h2>
           
           <div className="grid md:grid-cols-2 gap-12 items-start">
+
+            {/* Left Side: Info and Socials */}
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>Get In Touch</h3>
+
+              {/* Section Header */}
+              <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                Get In Touch
+              </h3>
+
+              {/* Intro Paragraph */}
               <p className="text-gray-700 text-lg leading-relaxed mb-8">
                 Have questions about our program, pricing, partnerships, or how to bring ShieldED Haven to your District? We're here to help. Whether you're an educator, parent, policymaker, or potential partner, we'd love to hear from you.
               </p>
               
-              <h4 className="text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Reach out to us about:</h4>
+              {/* Reach out topics */}
+              <h4 className="text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                Reach out to us about:
+              </h4>
               <div className="space-y-3 text-gray-700 mb-8">
-                <p className="flex items-start">
-                  <span className="text-cyan-500 mr-2">•</span>
-                  <span>Adopting or sponsoring a school</span>
-                </p>
-                <p className="flex items-start">
-                  <span className="text-cyan-500 mr-2">•</span>
-                  <span>Platform demos or pilot programs</span>
-                </p>
-                <p className="flex items-start">
-                  <span className="text-cyan-500 mr-2">•</span>
-                  <span>Media or press inquiries</span>
-                </p>
-                <p className="flex items-start">
-                  <span className="text-cyan-500 mr-2">•</span>
-                  <span>Strategic partnerships</span>
-                </p>
-                <p className="flex items-start">
-                  <span className="text-cyan-500 mr-2">•</span>
-                  <span>Technical support or general questions</span>
-                </p>
+                <p className="flex items-start"><span className="text-cyan-500 mr-2">•</span><span>Adopting or sponsoring a school</span></p>
+                <p className="flex items-start"><span className="text-cyan-500 mr-2">•</span><span>Platform demos or pilot programs</span></p>
+                <p className="flex items-start"><span className="text-cyan-500 mr-2">•</span><span>Media or press inquiries</span></p>
+                <p className="flex items-start"><span className="text-cyan-500 mr-2">•</span><span>Strategic partnerships</span></p>
+                <p className="flex items-start"><span className="text-cyan-500 mr-2">•</span><span>Technical support or general questions</span></p>
               </div>
 
-              {/* Contact Information Box */}
+              {/* Contact Info Box */}
               <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 mb-8">
-                <h4 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Contact Information</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  Contact Information
+                </h4>
                 <div className="space-y-4">
 
-                  {/* Email with Copy Button */}
+                  {/* Email */}
                   <div className="flex items-center gap-3 group">
                     <Mail className="w-6 h-6 text-cyan-500 flex-shrink-0" />
                     <div className="flex items-center gap-2">
@@ -76,7 +85,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                   
-                  {/* Phone with Copy Button */}
+                  {/* Phone */}
                   <div className="flex items-center gap-3 group">
                     <Phone className="w-6 h-6 text-cyan-500 flex-shrink-0" />
                     <div className="flex items-center gap-2">
@@ -94,7 +103,7 @@ export default function ContactPage() {
                       </button>
                     </div>
                   </div>
-                  
+
                   {/* Location */}
                   <div className="flex items-center gap-3 text-gray-700">
                     <MapPin className="w-6 h-6 text-cyan-500 flex-shrink-0" />
@@ -103,10 +112,13 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Social Media Section */}
+              {/* Social Media Links */}
               <div className="mt-8">
-                <h4 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Follow Us</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  Follow Us
+                </h4>
                 <div className="flex gap-4">
+
                   {/* LinkedIn */}
                   <a 
                     href="https://www.linkedin.com/company/shieldedhaven" 
@@ -148,17 +160,23 @@ export default function ContactPage() {
                   >
                     <Instagram className="w-6 h-6" />
                   </a>
+
                 </div>
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* Right Side: Contact Form */}
             <div className="bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-200">
+
+              {/* Top Icon */}
               <div className="flex justify-end mb-6">
                 <Shield className="w-20 h-20 text-cyan-500" />
               </div>
-              
+
+              {/* Form Fields */}
               <div className="space-y-6">
+
+                {/* Name Fields */}
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-gray-700 font-semibold mb-2">First Name *</label>
@@ -176,6 +194,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
+                {/* Email */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">Email *</label>
                   <input 
@@ -184,6 +203,7 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {/* Message */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">Message *</label>
                   <textarea 
@@ -192,6 +212,7 @@ export default function ContactPage() {
                   ></textarea>
                 </div>
 
+                {/* Informational Paragraphs */}
                 <p className="text-sm text-gray-600">
                   Once you submit the form, a member of our team will respond within the day. If your request is time-sensitive, please indicate that in the message.
                 </p>
@@ -200,6 +221,7 @@ export default function ContactPage() {
                   We take your privacy seriously. All submissions are securely stored and never shared without your consent.
                 </p>
 
+                {/* Submit Button */}
                 <button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 hover:shadow-xl transition-all transform hover:scale-105 shadow-lg"
@@ -208,12 +230,14 @@ export default function ContactPage() {
                 </button>
               </div>
             </div>
+
           </div>
         </div>
 
-         <div className="mt-20">
-                    <CTABanner />
-                </div>
+        {/* Bottom CTA Banner */}
+        <div className="mt-20">
+          <CTABanner />
+        </div>
       </section>
     </div>
   );

@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default function AboutPage() {
+  // Initialize Animate On Scroll library when component mounts
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
   }, []);
@@ -23,20 +24,33 @@ export default function AboutPage() {
             Our Company Story
           </h2>
 
-          {/* Story Text + Image */}
+          {/* Story Text + Founder Image */}
           <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+
+            {/* Left Column: Story Paragraphs */}
             <div className="space-y-4 text-gray-700 leading-relaxed text-lg">
-              <p data-aos="fade-right">The idea for ShieldED Haven didn't come from a boardroom or a business plan. It came from a conversation—with my oldest daughter. She was telling me about her pregnancy, about becoming a mother. And as I listened, it hit me: I might be around when my grandson enters school. That thought filled me with joy—and later, with fear. Would he be safe? Would he be protected from the online cruelty I've seen in schools nationwide?</p>
+              <p data-aos="fade-right">
+                The idea for ShieldED Haven didn't come from a boardroom or a business plan. It came from a conversation—with my oldest daughter. She was telling me about her pregnancy, about becoming a mother. And as I listened, it hit me: I might be around when my grandson enters school. That thought filled me with joy—and later, with fear. Would he be safe? Would he be protected from the online cruelty I've seen in schools nationwide?
+              </p>
 
-              <p data-aos="fade-right" data-aos-delay="100">I started researching. I dove into the data, the tools, and the gaps in our education system. What I found disturbed me: too many schools were reactive, too few tools truly worked, and too many kids were suffering silently.</p>
+              <p data-aos="fade-right" data-aos-delay="100">
+                I started researching. I dove into the data, the tools, and the gaps in our education system. What I found disturbed me: too many schools were reactive, too few tools truly worked, and too many kids were suffering silently.
+              </p>
 
-              <p className="font-semibold text-gray-900" data-aos="fade-right" data-aos-delay="200">So, I built something better.</p>
+              <p className="font-semibold text-gray-900" data-aos="fade-right" data-aos-delay="200">
+                So, I built something better.
+              </p>
 
-              <p data-aos="fade-right" data-aos-delay="300">ShieldED Haven is more than a platform. It's a promise. A promise to every parent, every teacher, and every student that they are not alone. With real-time counselors and Artificial Intelligence-powered alerts, we're creating school environments where every child can thrive—especially the ones we love most.</p>
+              <p data-aos="fade-right" data-aos-delay="300">
+                ShieldED Haven is more than a platform. It's a promise. A promise to every parent, every teacher, and every student that they are not alone. With real-time counselors and Artificial Intelligence-powered alerts, we're creating school environments where every child can thrive—especially the ones we love most.
+              </p>
 
-              <p data-aos="fade-right" data-aos-delay="400">This isn't just a company. It's a legacy for my grandson. And for every innocent child walking into school with a screen in their hand and the world on their shoulders.</p>
+              <p data-aos="fade-right" data-aos-delay="400">
+                This isn't just a company. It's a legacy for my grandson. And for every innocent child walking into school with a screen in their hand and the world on their shoulders.
+              </p>
             </div>
 
+            {/* Right Column: Founder Image */}
             <div className="relative flex justify-center" data-aos="fade-left">
               <img
                 src={Chris}
@@ -46,7 +60,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Veteran-owned banner */}
+          {/* Veteran-Owned Banner */}
           <div
             className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-8 mb-16"
             data-aos="zoom-in"
@@ -56,7 +70,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* What Makes Us Different */}
+          {/* What Makes Us Different Section */}
           <div
             className="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl p-12 mb-16 text-white"
             data-aos="fade-up"
@@ -64,6 +78,8 @@ export default function AboutPage() {
             <h2 className="text-4xl font-bold text-center mb-8">
               What Makes Us Different
             </h2>
+
+            {/* Grid of Features */}
             <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
@@ -95,41 +111,42 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-{/* Mission & Vision */}
-{/* Mission & Vision */}
-<div className="grid md:grid-cols-2 gap-8 mb-16">
-  <div
-    className="bg-white border-4 border-cyan-500 rounded-2xl p-8 transition-colors duration-500 transform hover:-translate-y-2 hover:shadow-xl hover:bg-[#F5FBFF]"
-    data-aos="fade-right"
-  >
-    <Rocket className="w-16 h-16 text-cyan-500 mx-auto mb-4" />
-    <h3 className="text-3xl font-bold text-cyan-500 text-center mb-6">Our Mission</h3>
-    <p className="text-gray-700 text-center text-lg">
-      To empower schools with Artificial Intelligence-driven tools to detect, prevent, and respond to cyberbullying—ensuring every student learns in a safe, inclusive environment.
-    </p>
-  </div>
 
-  <div
-    className="bg-white border-4 border-cyan-500 rounded-2xl p-8 transition-colors duration-500 transform hover:-translate-y-2 hover:shadow-xl hover:bg-[#F5FBFF]"
-    data-aos="fade-left"
-  >
-    <Eye className="w-16 h-16 text-cyan-500 mx-auto mb-4" />
-    <h3 className="text-3xl font-bold text-cyan-500 text-center mb-6">Our Vision</h3>
-    <p className="text-gray-700 text-center text-lg">
-      Our goal is to become the national leader in Artificial Intelligence-driven cyberbullying prevention, empowering schools nationwide with cutting-edge technology that creates safer, more inclusive digital spaces for students.
-    </p>
-  </div>
-</div>
+          {/* Mission & Vision Section */}
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
 
+            {/* Mission Card */}
+            <div
+              className="bg-white border-4 border-cyan-500 rounded-2xl p-8 transition-colors duration-500 transform hover:-translate-y-2 hover:shadow-xl hover:bg-[#F5FBFF]"
+              data-aos="fade-right"
+            >
+              <Rocket className="w-16 h-16 text-cyan-500 mx-auto mb-4" />
+              <h3 className="text-3xl font-bold text-cyan-500 text-center mb-6">Our Mission</h3>
+              <p className="text-gray-700 text-center text-lg">
+                To empower schools with Artificial Intelligence-driven tools to detect, prevent, and respond to cyberbullying—ensuring every student learns in a safe, inclusive environment.
+              </p>
+            </div>
 
+            {/* Vision Card */}
+            <div
+              className="bg-white border-4 border-cyan-500 rounded-2xl p-8 transition-colors duration-500 transform hover:-translate-y-2 hover:shadow-xl hover:bg-[#F5FBFF]"
+              data-aos="fade-left"
+            >
+              <Eye className="w-16 h-16 text-cyan-500 mx-auto mb-4" />
+              <h3 className="text-3xl font-bold text-cyan-500 text-center mb-6">Our Vision</h3>
+              <p className="text-gray-700 text-center text-lg">
+                Our goal is to become the national leader in Artificial Intelligence-driven cyberbullying prevention, empowering schools nationwide with cutting-edge technology that creates safer, more inclusive digital spaces for students.
+              </p>
+            </div>
+          </div>
 
-
-          {/* Core Values */}
+          {/* Core Values Section */}
           <div className="bg-white py-12" data-aos="fade-up">
             <h2 className="text-5xl font-bold text-center text-cyan-500 mb-12">
               Our Core Values
             </h2>
-            
+
+            {/* List of Core Values */}
             <div className="space-y-6">
               {[
                 { icon: Heart, title: "Empathy", description: "We prioritize understanding and compassion in all interactions." },
@@ -155,7 +172,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* CTA Banner */}
+        {/* Call-to-Action Banner */}
         <CTABanner />
       </section>
     </div>
